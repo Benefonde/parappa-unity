@@ -1,0 +1,33 @@
+{
+	"lines":
+    {
+        1:
+        {
+            {pos:1, key:"T", sound:0, anim: 0, player:0},
+            {pos:2, key:"O", sound:1, anim: 0, player:0},
+            {pos:4, key:"X", sound:2, anim: 0, player:0},
+            {pos:2, key:"L", sound:3, anim: 0, player:0},
+        },
+        2:
+        {
+            {pos:17, key:"T", sound:4, anim: 0, player:1},
+            {pos:18, key:"O", sound:5, anim: 0, player:1},
+            {pos:20, key:"X", sound:6, anim: 0, player:1},
+            {pos:21, key:"L", sound:7, anim: 0, player:1},
+        },
+        3:
+        {
+            {pos:22, key:"T", sound:8, anim: 0, player:0},
+            {pos:26, key:"O", sound:9, anim: 0, player:0},
+            {pos:27, key:"X", sound:10, anim: 0, player:0},
+            {pos:29, key:"L", sound:11, anim: 0, player:0},
+        },
+        4:
+        {
+            {pos:33, key:"R", sound:12, anim: 0, player:1},
+            {pos:37, key:"S", sound:13, anim: 0, player:1},
+            {pos:38, key:"O", sound:14, anim: 0, player:1},
+            {pos:40, key:"S", sound:15, anim: 0, player:1},
+        }
+    }
+}

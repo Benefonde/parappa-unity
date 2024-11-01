@@ -1,0 +1,19 @@
+Every button press timed to a dot is worth 3 points.
+
+Every button press which is mistimed will cost you points equal to the number of buttons on the original line (ie. if there are 3 buttons on the line, a mistimed press costs you 3 points).
+
+Any button you press which isn’t on the original line and makes Parappa go ‘oops!’ is worth nothing. It gives and costs no points.
+
+Any line which scores at least 1 point is Good. Any line which scores no points or loses points is Bad.
+
+In order for any line to be worth any points at all, you must use and time every unique input at least once (ie. if Triangle, Circle and R appear in the line, you have to play and time all 3 buttons at least once correctly).
+
+If the first button you played doesn’t match the first button the teacher has, the game will dock some points (same amount as buttons on original line). Apart from that, the buttons you play are irrelevant.
+
+There’s 16 dots in a line (8 in half and 32 in double), and once you’ve played a line, the game looks at all your timed presses (only your timed ones, mistimed ones aren’t used) and separates then into pairs (16 dots makes 8 pairs a line).
+
+There’s 4 pairs: X., .X, XX, ..
+
+If you have at least two of the pairs that aren’t just two dots, the game gives you bonus points. Every .X is worth 15, every X. is worth 6, every XX is worth 9. Additionally, if all four pairs are used in a line, you get 18 more points.
+
+By the way, if the first button you pressed isn’t the same as the teacher’s, you don’t get any of these bonus points at all.
