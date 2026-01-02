@@ -29,37 +29,37 @@ public class Score : MonoBehaviour
     {
         if (line.turn == 1)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetButtonDown("Triangle"))
             {
                 buttonsPressed++;
                 line.StampButton(0);
                 QueueScore();
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetButtonDown("Circle"))
             {
                 buttonsPressed++;
                 line.StampButton(1);
                 QueueScore();
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetButtonDown("Cross"))
             {
                 buttonsPressed++;
                 line.StampButton(2);
                 QueueScore();
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetButtonDown("Square"))
             {
                 buttonsPressed++;
                 line.StampButton(3);
                 QueueScore();
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetButtonDown("R"))
             {
                 buttonsPressed++;
                 line.StampButton(5);
                 QueueScore();
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetButtonDown("L"))
             {
                 buttonsPressed++;
                 line.StampButton(4);
@@ -91,10 +91,10 @@ public class Score : MonoBehaviour
         }
         queuedScore += patternScore;*/
 
-        int closest_distance = 10;
+        int closest_distance = 11;
         for (int i = 0; i < validTimings.Count; i++)
         {
-            int distance = Mathf.Abs(playerTimings[playerTimings.Count - 1]) - Mathf.Abs(validTimings[i]);
+            int distance = Mathf.Abs(playerTimings[playerTimings.Count - 1]) - Mathf.Abs(validTimings[i] + 6);
             if (distance <= closest_distance && distance >= -closest_distance)
             {
                 closest_distance = distance;
@@ -107,7 +107,7 @@ public class Score : MonoBehaviour
         }
         else
         {
-            queuedScore -= 5;
+            queuedScore -= 12;
         }
     }
 
