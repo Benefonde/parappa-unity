@@ -17,6 +17,11 @@ public class Score : MonoBehaviour
         }
         score = 0;
         digit[0].sprite = nums[0];
+        validTimings.Clear();
+        for (int i = 0; i < 19; i++)
+        {
+            validTimings.Add(125 + i * 30);
+        }
     }
 
     // Update is called once per frame
@@ -56,9 +61,9 @@ public class Score : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                buttonsPressed++; 
+                buttonsPressed++;
                 line.StampButton(4);
-                QueueScore();   
+                QueueScore();
             }
         }
     }
@@ -86,28 +91,29 @@ public class Score : MonoBehaviour
         }
         queuedScore += patternScore;*/
 
-        int closest_distance = int.MaxValue;
-        int closest = 0;
+        int closest_distance = 10;
         for (int i = 0; i < validTimings.Count; i++)
         {
-            int distance = (-Mathf.Abs(playerTimings[playerTimings.Count - 1]) - -Mathf.Abs(validTimings[i]));
-            if (distance < closest_distance) { closest_distance = distance; closest = validTimings[i]; }
+            int distance = Mathf.Abs(playerTimings[playerTimings.Count - 1]) - Mathf.Abs(validTimings[i]);
+            if (distance <= closest_distance && distance >= -closest_distance)
+            {
+                closest_distance = distance;
+            }
         }
-        if (Math.Abs(playerTimings[playerTimings.Count - 1] - Mathf.Abs(closest)) < 10)
+        print(closest_distance);
+        if (Mathf.Abs(closest_distance) <= 10)
         {
             queuedScore += 6;
-            print("actually twerks btw");
         }
         else
         {
             queuedScore -= 5;
-            print("dye dye snip snip cut cut");
         }
     }
 
     public void AddScore()
     {
-        if (buttonsPressed > 25)
+        if (buttonsPressed > line.dots + 4)
         {
             queuedScore = -100;
         }
@@ -137,13 +143,12 @@ public class Score : MonoBehaviour
 
     public int DigitNum(float val, int digit)
     {
-        float v = val /= Mathf.Pow(10, digit - 1);
-        int i = (int)v;
-        return i % 10;
+        return (int)(val /= Mathf.Pow(10, digit - 1)) % 10;
     }
     public static int ReverseNum(int num)
     {
-        for (int result = 0; ; result = result * 10 + num % 10, num /= 10) if (num == 0) return result;
+        for (int result = 0; ; result = result * 10 + num % 10, num /= 10) 
+            if (num == 0) return result;
     }
 
     public Sprite[] nums;
@@ -159,26 +164,6 @@ public class Score : MonoBehaviour
 
     public List<int> playerTimings = new List<int>();
 
-    List<int> validTimings = new List<int>()
-    {
-        -256,
-        -226,
-        -196,
-        -166,
-        -136,
-        -106,
-        -86,
-        -56,
-        -26,
-        4,
-        34,
-        64,
-        94,
-        124,
-        154,
-        184,
-        214,
-        244,
-        274
-    };
+    public List<int> validTimings = new List<int>();
+    //public List<int> debug = new List<int>();
 }

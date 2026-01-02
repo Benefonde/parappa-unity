@@ -78,7 +78,7 @@ public class LineScript : MonoBehaviour
     float bpm;
     Sprite[] iconChar = new Sprite[2]; // 0 parappa 1 teacher
     public int turn; //0 teacher 1 parappa
-    int dots = 16; //1 line long, charts using the dots thingy should only have buttons from -2 to 32
+    public int dots = 16; //1 line long, charts using the dots thingy should only have buttons from -2 to 32
     public Chart chart;
     RappinMeter rank;
     //ui elements

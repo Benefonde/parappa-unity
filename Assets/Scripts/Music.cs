@@ -39,5 +39,5 @@ public class Music : MonoBehaviour
     }
 
     public AudioClip[] rankMusic; // 0 cool 1 good 2 bad 3 awful 4 fail
-    AudioSource aud;
+    public AudioSource aud;
 }
