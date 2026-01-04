@@ -34,7 +34,7 @@ public class LineScript : MonoBehaviour
             {
                 if (icon.rectTransform.anchoredPosition.x > -97 + ((dots - 16) * 15))
                 {
-                    icon.rectTransform.anchoredPosition = new Vector2(-112, 192);
+                    icon.rectTransform.anchoredPosition = new Vector2(-127, 192);
                     icon.sprite = iconChar[turn];
                     turn++;
                     EndOfTurnThing();
@@ -54,7 +54,7 @@ public class LineScript : MonoBehaviour
         {
             if (icon.rectTransform.anchoredPosition.x > -97 + (dots * 15))
             {
-                icon.rectTransform.anchoredPosition = new Vector2(-112, 192);
+                icon.rectTransform.anchoredPosition = new Vector2(-127, 192);
                 icon.sprite = iconChar[turn];
                 turn++;
                 EndOfTurnThing();
