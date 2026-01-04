@@ -31,7 +31,8 @@ public class RappinMeter : MonoBehaviour
             return;
         }
         // screw it. im rewriting this.
-        int mainRank = Mathf.FloorToInt(rank + 0.01f / 3);
+        int mainRank = Mathf.FloorToInt((rank + 0.01f) / 3f);
+        print(mainRank + " RANK");
         switch (mainRank)
         {
             default:
@@ -110,8 +111,8 @@ public class RappinMeter : MonoBehaviour
             case 12: BlinkyBlinkRank(0, 0, 0, 1); mus.ChangeMusic(4); break; // lmao good luck ever getting this without mods
             case 13: BlinkyBlinkRank(0, 0, 0, 0); mus.ChangeMusic(4); break;
         }
-        rt.anchoredPosition = new Vector2(-45, 140 - (Mathf.Floor((rank + 1) / 3) * 25));
-        if (rt.anchoredPosition.y == 40) rt.anchoredPosition += Vector2.up * 25;
+        rt.anchoredPosition = new Vector2(-20, 105 - (Mathf.Floor((rank + 1) / 3) * 14));
+        if (rt.anchoredPosition.y == 49) rt.anchoredPosition += Vector2.up * 25;
     }
 
     void BlinkyBlinkRank(int a = 0, int b = 0, int c = 0, int d = 0)

@@ -9,13 +9,13 @@ public class LineScript : MonoBehaviour
 {
     void Start()
     {
-        icon.rectTransform.anchoredPosition = new Vector2(-250, 190);
+        icon.rectTransform.anchoredPosition = new Vector2(-127, 192);
         rank = FindObjectOfType<RappinMeter>();
         if (rank == null) NoScoring = true;
         turn = 0;
         bpm = 107;
         //bpm = chart.bpm; miko is currently writing the chart system!  
-        UpdateDotCount(8);
+        UpdateDotCount(16);
         iconChar[0] = chart.iconSprite[0];
         iconChar[1] = chart.iconSprite[1];
         for (int i = 0; i < 6; i++)
@@ -27,26 +27,39 @@ public class LineScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        icon.rectTransform.Translate(new Vector2(bpm * 2 * Time.deltaTime * transform.parent.GetComponent<CanvasScaler>().scaleFactor, 0), Space.Self);
-        if (icon.rectTransform.anchoredPosition.x > -220 + (dots * 30))
+        icon.rectTransform.Translate(new Vector2(bpm * Time.deltaTime * transform.parent.GetComponent<CanvasScaler>().scaleFactor, 0), Space.Self);
+        if (doubleLine)
         {
-            if (!doubleLine)
+            if (icon.rectTransform.anchoredPosition.y == 174)
             {
-                icon.rectTransform.anchoredPosition = new Vector2(-250, 190);
+                if (icon.rectTransform.anchoredPosition.x > -97 + ((dots - 16) * 15))
+                {
+                    icon.rectTransform.anchoredPosition = new Vector2(-112, 192);
+                    icon.sprite = iconChar[turn];
+                    turn++;
+                    EndOfTurnThing();
+                    return;
+                }
+            }
+            else
+            {
+                if (icon.rectTransform.anchoredPosition.x > -97 + (16 * 15))
+                {
+                    icon.rectTransform.anchoredPosition = new Vector2(-97, 174);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            if (icon.rectTransform.anchoredPosition.x > -97 + (dots * 15))
+            {
+                icon.rectTransform.anchoredPosition = new Vector2(-112, 192);
                 icon.sprite = iconChar[turn];
                 turn++;
                 EndOfTurnThing();
                 return;
             }
-            else if (icon.rectTransform.anchoredPosition.y == -220 + (dots * 30))
-            {
-                icon.rectTransform.anchoredPosition = new Vector2(-250, 190);
-                icon.sprite = iconChar[turn];
-                turn++;
-                EndOfTurnThing();
-                return;
-            }
-            icon.rectTransform.anchoredPosition = new Vector2(-196, 150);
         }
     }
 
@@ -102,7 +115,7 @@ public class LineScript : MonoBehaviour
     public ButtonTextures buttonIconSprites;
     public int turn; //0 teacher 1 parappa 2
     public int dots = 32;
-    public Chart chart;
+    public ChartSHUTUPUNITY chart;
     RappinMeter rank;
     //ui elements
     public GameObject[] line; // 0 is normal line, 1 is 2nd line

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c40aaa45fd5b642b46cae385770624, type: 3}
+  m_Name: Um Jammer Lammy Stage 3 L
+  m_EditorClassIdentifier: 
+  iconSprite:
+  - {fileID: 184950751378207249, guid: 2df8e192860de7648928a5d061bd097a, type: 3}
+  - {fileID: -6655244283048671155, guid: 3fcd487427ce29f47bcfe085523b847c, type: 3}
+  chart: {fileID: 0}
+  sounds: []

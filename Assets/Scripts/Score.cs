@@ -20,7 +20,7 @@ public class Score : MonoBehaviour
         validTimings.Clear();
         for (int i = 0; i < 19; i++)
         {
-            validTimings.Add(-195 + i * 30);
+            validTimings.Add(-97 + i * 15);
         }
     }
 
@@ -98,7 +98,7 @@ public class Score : MonoBehaviour
         }
         queuedScore += patternScore;*/
         float scaler = transform.parent.GetComponent<CanvasScaler>().scaleFactor; 
-        int closest_distance = 8;
+        int closest_distance = 5;
         for (int i = 0; i < validTimings.Count; i++)
         {
             int distance = Mathf.RoundToInt(Mathf.Abs(playerTimings[playerTimings.Count - 1]) - Mathf.Abs(validTimings[i]));
@@ -108,7 +108,7 @@ public class Score : MonoBehaviour
             }
         }
         print(closest_distance);
-        if (Mathf.Abs(closest_distance) <= 7)
+        if (Mathf.Abs(closest_distance) <= 4 * scaler)
         {
             queuedScore += 6;
         }

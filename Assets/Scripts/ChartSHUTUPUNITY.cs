@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Stage", menuName = "New Stage")]
-public class Chart : ScriptableObject
+public class ChartSHUTUPUNITY : ScriptableObject
 {
     public Sprite[] iconSprite;
     public TextAsset chart;
