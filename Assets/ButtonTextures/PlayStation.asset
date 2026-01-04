@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b1075c7c738c343bf847f61dfabd96, type: 3}
+  m_Name: PlayStation
+  m_EditorClassIdentifier: 
+  iconSprite:
+  - {fileID: 6788948236859720998, guid: ae2e29d118a70e848a88157a0ad7067a, type: 3}
+  - {fileID: 5296145738744248237, guid: ae2e29d118a70e848a88157a0ad7067a, type: 3}
+  - {fileID: 297552370404379455, guid: ae2e29d118a70e848a88157a0ad7067a, type: 3}
+  - {fileID: -487880508637781979, guid: ae2e29d118a70e848a88157a0ad7067a, type: 3}
+  - {fileID: -6805567857304384604, guid: ae2e29d118a70e848a88157a0ad7067a, type: 3}
+  - {fileID: -7234843478721310102, guid: ae2e29d118a70e848a88157a0ad7067a, type: 3}

@@ -11,56 +11,46 @@ public class LineScript : MonoBehaviour
     {
         icon.rectTransform.anchoredPosition = new Vector2(-250, 190);
         rank = FindObjectOfType<RappinMeter>();
+        if (rank == null) NoScoring = true;
         turn = 0;
-        bpm = chart.bpm;
-        UpdateDotCount(16);
+        bpm = 107;
+        //bpm = chart.bpm; miko is currently writing the chart system!  
+        UpdateDotCount(8);
         iconChar[0] = chart.iconSprite[0];
         iconChar[1] = chart.iconSprite[1];
+        for (int i = 0; i < 6; i++)
+        {
+            buttonIcons[i] = buttonIconSprites.iconSprite[i];
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        icon.rectTransform.Translate(new Vector2(bpm * 2 * Time.deltaTime, 0), Space.Self);
-        if (icon.rectTransform.anchoredPosition.x > 270)
+        icon.rectTransform.Translate(new Vector2(bpm * 2 * Time.deltaTime * transform.parent.GetComponent<CanvasScaler>().scaleFactor, 0), Space.Self);
+        if (icon.rectTransform.anchoredPosition.x > -220 + (dots * 30))
         {
             if (!doubleLine)
             {
-                icon.rectTransform.anchoredPosition = new Vector2(-280, 190);
+                icon.rectTransform.anchoredPosition = new Vector2(-250, 190);
                 icon.sprite = iconChar[turn];
                 turn++;
-                Aaaaa();
-                for (int i = 0; i < transform.GetChild(2).childCount; i++)
-                {
-                    Destroy(transform.GetChild(2).GetChild(i).gameObject);
-                }
-                if (rank.rank == 12)
-                {
-                    bpm = 0;
-                }
+                EndOfTurnThing();
                 return;
             }
-            else if (icon.rectTransform.anchoredPosition.y == 150)
+            else if (icon.rectTransform.anchoredPosition.y == -220 + (dots * 30))
             {
-                icon.rectTransform.anchoredPosition = new Vector2(-280, 190);
+                icon.rectTransform.anchoredPosition = new Vector2(-250, 190);
                 icon.sprite = iconChar[turn];
                 turn++;
-                Aaaaa();
-                for (int i = 0; i < transform.GetChild(2).childCount; i++)
-                {
-                    Destroy(transform.GetChild(2).GetChild(i).gameObject);
-                }
-                if (rank.rank == 12)
-                {
-                    bpm = 0;
-                }
+                EndOfTurnThing();
                 return;
             }
             icon.rectTransform.anchoredPosition = new Vector2(-196, 150);
         }
     }
 
-    void Aaaaa()
+    void EndOfTurnThing()
     {
         if (turn == 2)
         {
@@ -68,42 +58,58 @@ public class LineScript : MonoBehaviour
             score.playerTimings.Clear();
             score.AddScore();
         }
+        for (int i = 0; i < transform.GetChild(1).childCount; i++)
+        {
+            Destroy(transform.GetChild(1).GetChild(i).gameObject);
+        }
+        if (NoScoring) return;
+        if (rank.rank == 12) bpm = 0;
     }
 
     public void StampButton(int but)
     {
-        GameObject a = Instantiate(buttons[but], icon.transform.position, icon.transform.rotation, transform.GetChild(2));
+        GameObject a = Instantiate(button, icon.transform.position, icon.transform.rotation, transform.GetChild(1));
+        a.GetComponent<Image>().sprite = buttonIcons[but];
         RectTransform b = a.GetComponent<RectTransform>();
         b.anchoredPosition = new Vector2(Mathf.RoundToInt(b.anchoredPosition.x), b.anchoredPosition.y);
-        score.playerTimings.Add(Mathf.RoundToInt(a.transform.position.x));
+        score.playerTimings.Add(Mathf.RoundToInt(b.anchoredPosition.x));
     }
 
     public void UpdateDotCount(int amount)
     {
+        for (int i = 0; i < 18; i++) line[0].transform.GetChild(i).gameObject.SetActive(false);
+        for (int i = 0; i < 16; i++) line[1].transform.GetChild(i).gameObject.SetActive(false);
+        line[1].SetActive(false);
         dots = amount;
         if (amount > 16)
         {
             line[1].SetActive(true);
+            for (int i = 0; i < 18; i++) line[0].transform.GetChild(i).gameObject.SetActive(true);
             doubleLine = true;
+            for (int i = 0; i < dots - 16; i++) line[1].transform.GetChild(i).gameObject.SetActive(true);
         }
         else
         {
-            line[1].SetActive(false);
             doubleLine = false;
+            for (int i = 0; i < dots + 2; i++) line[0].transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
     //chart stuff
     float bpm;
     Sprite[] iconChar = new Sprite[2]; // 0 parappa 1 teacher
-    public int turn; //0 teacher 1 parappa
-    public int dots = 32; //1 line long, charts using the dots thingy should only have buttons from -2 to 32
+    Sprite[] buttonIcons = new Sprite[6];
+    public ButtonTextures buttonIconSprites;
+    public int turn; //0 teacher 1 parappa 2
+    public int dots = 32;
     public Chart chart;
     RappinMeter rank;
     //ui elements
     public GameObject[] line; // 0 is normal line, 1 is 2nd line
     public Image icon;
-    public GameObject[] buttons; //0 triangle/W 1 circle/D 2 cross/S 3 square/A 4 L/Q 5 R/E 6 shieruken (any button/key)
+    public GameObject button;
     public Score score;
+    // other setting
     public bool doubleLine;
+    public bool NoScoring;
 }

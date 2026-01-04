@@ -20,7 +20,7 @@ public class Score : MonoBehaviour
         validTimings.Clear();
         for (int i = 0; i < 19; i++)
         {
-            validTimings.Add(125 + i * 30);
+            validTimings.Add(-195 + i * 30);
         }
     }
 
@@ -32,37 +32,44 @@ public class Score : MonoBehaviour
             if (Input.GetButtonDown("Triangle"))
             {
                 buttonsPressed++;
-                line.StampButton(0);
+                line.StampButton(2);
                 QueueScore();
             }
             if (Input.GetButtonDown("Circle"))
             {
                 buttonsPressed++;
-                line.StampButton(1);
+                line.StampButton(3);
                 QueueScore();
             }
             if (Input.GetButtonDown("Cross"))
             {
                 buttonsPressed++;
-                line.StampButton(2);
+                line.StampButton(4);
                 QueueScore();
             }
             if (Input.GetButtonDown("Square"))
             {
                 buttonsPressed++;
-                line.StampButton(3);
+                line.StampButton(5);
                 QueueScore();
             }
             if (Input.GetButtonDown("R"))
             {
                 buttonsPressed++;
-                line.StampButton(5);
+                line.StampButton(1);
                 QueueScore();
             }
             if (Input.GetButtonDown("L"))
             {
                 buttonsPressed++;
-                line.StampButton(4);
+                line.StampButton(0);
+                QueueScore();
+            }
+
+            if (Input.GetKey(KeyCode.I))
+            {
+                //buttonsPressed++;
+                line.StampButton(2);
                 QueueScore();
             }
         }
@@ -90,18 +97,18 @@ public class Score : MonoBehaviour
             case ".X": patternScore += 9; break;
         }
         queuedScore += patternScore;*/
-
-        int closest_distance = 11;
+        float scaler = transform.parent.GetComponent<CanvasScaler>().scaleFactor; 
+        int closest_distance = 8;
         for (int i = 0; i < validTimings.Count; i++)
         {
-            int distance = Mathf.Abs(playerTimings[playerTimings.Count - 1]) - Mathf.Abs(validTimings[i] + 6);
+            int distance = Mathf.RoundToInt(Mathf.Abs(playerTimings[playerTimings.Count - 1]) - Mathf.Abs(validTimings[i]));
             if (distance <= closest_distance && distance >= -closest_distance)
             {
-                closest_distance = distance;
+                closest_distance = Mathf.RoundToInt(distance * scaler);
             }
         }
         print(closest_distance);
-        if (Mathf.Abs(closest_distance) <= 10)
+        if (Mathf.Abs(closest_distance) <= 7)
         {
             queuedScore += 6;
         }
@@ -117,9 +124,10 @@ public class Score : MonoBehaviour
         {
             queuedScore = -100;
         }
-        FindObjectOfType<RappinMeter>().ChangeRank(queuedScore, buttonsPressed);
+        if (!NoScoring) FindObjectOfType<RappinMeter>().ChangeRank(queuedScore, buttonsPressed);
         buttonsPressed = 0;
-        score += queuedScore;
+        if ((int)score + (int)queuedScore < 32767) score += queuedScore;
+        else score = 32767;
         if (score < 0)
         {
             score = 0;
@@ -153,9 +161,9 @@ public class Score : MonoBehaviour
 
     public Sprite[] nums;
     [SerializeField]
-    int score;
+    short score;
     [SerializeField]
-    int queuedScore;
+    short queuedScore;
     public Image[] digit;
     int buttonsPressed;
 
@@ -165,5 +173,6 @@ public class Score : MonoBehaviour
     public List<int> playerTimings = new List<int>();
 
     public List<int> validTimings = new List<int>();
+    public bool NoScoring;
     //public List<int> debug = new List<int>();
 }
