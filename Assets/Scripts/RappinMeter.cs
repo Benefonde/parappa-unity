@@ -56,7 +56,7 @@ public class RappinMeter : MonoBehaviour
                 {
                     if (rank % 3 != 2) aud.PlayOneShot(upDown[0]);
                     else aud.PlayOneShot(upDown[2]);
-                    if (scoreFromLine > CoolScore())
+                    if (scoreFromLine > CoolScore() || rank < 3)
                     { if (rank % 3 != 2) rank--; else rank -= 2; }
                 }
                 else

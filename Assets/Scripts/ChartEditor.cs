@@ -55,8 +55,6 @@ public class ChartEditor : MonoBehaviour
         {
             EditorLine editorLine = new EditorLine();
             editorLine.length = lineLength;
-            editorLine.buttons = new List<Button>();
-            editorLine.buttons = buttonsInLine;
             editorLine.subtitle = subtitleField.text;
             editorLines.Add(editorLine);
             lineCount.text = $"Lines: {editorLines.Count}";
@@ -79,7 +77,7 @@ public class ChartEditor : MonoBehaviour
     void UpdateOwner(int direction)
     {
         if (direction < 0) ownerNum--; else ownerNum++;
-        if (ownerNum > 2) ownerNum = 2;
+        if (ownerNum > 2) ownerNum = 0;
         if (ownerNum < 0) ownerNum = 0;
         ownerIndicatorGeneral.sprite = owner[ownerNum];
     }
@@ -173,7 +171,7 @@ public class ChartEditor : MonoBehaviour
         {
             Line line = new Line();
             line.length = editorLines[i].length;
-            line.buttons = editorLines[i].buttons.ToArray();
+            line.buttons = buttons.ToArray();
             line.subtitle = editorLines[i].subtitle;
             lines.Add(line);
         }
@@ -185,7 +183,6 @@ public class ChartEditor : MonoBehaviour
     public class EditorLine
     {
         public byte length;
-        public List<Button> buttons = new List<Button>();
         public string subtitle;
     }
 
