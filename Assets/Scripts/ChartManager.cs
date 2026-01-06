@@ -134,7 +134,7 @@ public class Chart : SerializableObject
         SerializedDataThingy[] data = new SerializedDataThingy[3];
         data[0] = new SerializedStringThingy { key = 1, value = bpm.ToString(CultureInfo.InvariantCulture) };
         data[1] = new SerializedListThingy { key = 2, value = lines };
-        data[1] = new SerializedStringThingy { key = 3, value = Convert.ToBase64String(Encoding.UTF8.GetBytes(chartName)) };
+        data[2] = new SerializedStringThingy { key = 3, value = Convert.ToBase64String(Encoding.UTF8.GetBytes(chartName)) };
         return data;
     }
 
