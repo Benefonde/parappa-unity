@@ -127,12 +127,14 @@ public class Chart : SerializableObject
 {
     public float bpm;
     public Line[] lines;
+    public string chartName;
 
     public override SerializedDataThingy[] GetData()
     {
-        SerializedDataThingy[] data = new SerializedDataThingy[2];
+        SerializedDataThingy[] data = new SerializedDataThingy[3];
         data[0] = new SerializedStringThingy { key = 1, value = bpm.ToString(CultureInfo.InvariantCulture) };
         data[1] = new SerializedListThingy { key = 2, value = lines };
+        data[1] = new SerializedStringThingy { key = 3, value = Convert.ToBase64String(Encoding.UTF8.GetBytes(chartName)) };
         return data;
     }
 
@@ -145,6 +147,9 @@ public class Chart : SerializableObject
                 break;
             case 2:
                 lines = reader.ReadListThingy<Line>();
+                break;
+            case 3:
+                chartName = Encoding.UTF8.GetString(Convert.FromBase64String(reader.ReadStringThingy()));
                 break;
         }
     }

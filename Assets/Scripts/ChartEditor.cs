@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class ChartEditor : MonoBehaviour
 {
@@ -146,7 +147,7 @@ public class ChartEditor : MonoBehaviour
         }
         if (type >= 0)
         {
-            GameObject buttonObject = Instantiate(buttonStamp, transform.GetChild(3));
+            GameObject buttonObject = Instantiate(buttonStamp, transform.GetChild(0).GetChild(3));
             buttonObject.GetComponent<RectTransform>().anchoredPosition = selected.anchoredPosition;
             buttonObject.GetComponent<Image>().sprite = buttonType[type];
             Button button = new Button();
@@ -167,6 +168,7 @@ public class ChartEditor : MonoBehaviour
     {
         print(buttons.Count);
         shart.bpm = bpm;
+        shart.chartName = nameField.text;
         for (int i = 0; i < editorLines.Count; i++)
         {
             Line line = new Line();
@@ -176,7 +178,8 @@ public class ChartEditor : MonoBehaviour
             lines.Add(line);
         }
         shart.lines = lines.ToArray();
-        print(catManager.SaveChart(shart));
+        if (!Directory.Exists($"{Application.dataPath}/Charts")) Directory.CreateDirectory($"{Application.dataPath}/Charts");
+        File.WriteAllText($"{Application.dataPath}/Charts/{shart.chartName}.ptrc", catManager.SaveChart(shart));
         lines.Clear();
     }
 
@@ -193,7 +196,7 @@ public class ChartEditor : MonoBehaviour
 
     float selectedDot;
     public RectTransform selected;
-    public InputField subtitleField;
+    public InputField subtitleField, nameField, bpmField, descriptionField;
     int currentEditorLine;
     public int currentPage;
     public GameObject buttonStamp, ownerIndicator, helpMenu;
